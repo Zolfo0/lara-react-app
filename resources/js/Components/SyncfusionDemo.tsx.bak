@@ -1,0 +1,63 @@
+import React from 'react';
+import { GridComponent, ColumnsDirective, ColumnDirective, Page, Selection, Inject } from '@syncfusion/ej2-react-grids';
+import { ButtonComponent } from '@syncfusion/ej2-react-buttons';
+import { DatePickerComponent } from '@syncfusion/ej2-react-calendars';
+
+interface Employee {
+    OrderID: number;
+    CustomerID: string;
+    EmployeeID: number;
+    OrderDate: Date;
+    ShipName: string;
+}
+
+const SyncfusionDemo: React.FC = () => {
+    const data: Employee[] = [
+        {
+            OrderID: 10248,
+            CustomerID: 'VINET',
+            EmployeeID: 5,
+            OrderDate: new Date(8364186e5),
+            ShipName: 'Vins et alcools Chevalier'
+        },
+        {
+            OrderID: 10249,
+            CustomerID: 'TOMSP',
+            EmployeeID: 6,
+            OrderDate: new Date(836505e6),
+            ShipName: 'Toms Spezialitäten'
+        },
+        // Add more data as needed
+    ];
+
+    return (
+        <div className="p-6">
+            <h2 className="text-2xl font-bold mb-4">Syncfusion Components Demo</h2>
+
+            <div className="mb-6 flex gap-4 items-center">
+                <ButtonComponent isPrimary={true}>Primary Button</ButtonComponent>
+                <DatePickerComponent placeholder="Select a date" />
+            </div>
+
+            <div className="bg-white rounded-lg shadow">
+                <GridComponent
+                    dataSource={data}
+                    allowPaging={true}
+                    pageSettings={{ pageSize: 5 }}
+                    allowSelection={true}
+                >
+                    <ColumnsDirective>
+                        <ColumnDirective field='OrderID' headerText='Order ID' width='120' textAlign="Right"/>
+                        <ColumnDirective field='CustomerID' headerText='Customer ID' width='150'/>
+                        <ColumnDirective field='EmployeeID' headerText='Employee ID' width='120' textAlign="Right"/>
+                        <ColumnDirective field='OrderDate' headerText='Order Date' width='130' format="yMd" textAlign="Right"/>
+                        <ColumnDirective field='ShipName' headerText='Ship Name' width='150'/>
+                    </ColumnsDirective>
+                    <Inject services={[Page, Selection]} />
+                </GridComponent>
+            </div>
+        </div>
+    );
+};
+
+export default SyncfusionDemo;
